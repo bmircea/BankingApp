@@ -1,5 +1,13 @@
-public class App {
+import main.Service;
+
+public final class App {
+    
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Service s = new Service();
+        s.startApp();
     }
+
+    
 }
+
+
