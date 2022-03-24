@@ -7,7 +7,7 @@ import classes.*;
 
 public final class Service {
     String a;
-    ArrayList<Client> Clients = new ArrayList<Client>(); 
+    ArrayList<ActiuniClient> Clients = new ArrayList<ActiuniClient>(); 
     public Service(){
 
     }
@@ -24,6 +24,7 @@ public final class Service {
     public void printClient(){
         this.Clients.add(new ClientPersoanaFizica("87263782647823", "nume", "prenume", new Date()));
         System.out.println(Clients.get(0).toString());
+        System.out.println(Clients.get(0).getCont());
     }
      
     

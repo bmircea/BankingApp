@@ -17,8 +17,7 @@ public final class Cont implements OperatiuniCont{
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        return this.numarCont;
     }
 
     @Override
