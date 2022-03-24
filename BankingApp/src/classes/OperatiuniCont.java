@@ -9,9 +9,4 @@ public interface OperatiuniCont {
         sender.debitare(value);  // TODO Create exceptions
         receiver.creditare(value); // TODO Create transactions
     }
-
-    public static void transfer(Client sender, Client receiver, double value){
-        sender.debitare(value);  // TODO Create exceptions
-        receiver.creditare(value); // TODO Create transactions
-    }
 }
