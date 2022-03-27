@@ -1,10 +1,11 @@
 package classes;
 
-public abstract class PersoanaJuridica {
-    private final Long CUI;
+public abstract class PersoanaJuridica extends Persoana {
+    private final long CUI;
     private String denumire;
 
-    public PersoanaJuridica(Long cUI, String denumire) {
+    public PersoanaJuridica(long cUI, String denumire) {
+        super();
         CUI = cUI;
         this.denumire = denumire;
     }
@@ -13,6 +14,8 @@ public abstract class PersoanaJuridica {
     public String toString() {
         return "[CUI=" + CUI + ", denumire=" + denumire + "]";
     }
+
+
 
     
 

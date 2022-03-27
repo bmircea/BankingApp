@@ -1,36 +1,33 @@
 package classes;
 
-import java.util.Random;
+import classes.Utilitare.LoanType;
+
 
 public interface ActiuniClient{    
-    public static Integer generateAccID(){
-        Random rdn = new Random();
-        return rdn.nextInt(100000);
-    }
-
+    
     public Integer getID();
 
     public Cont getCont();
 
     public String toString();
+
+    public void addLoan(Integer durationM, Double value, LoanType type);
     
     public static void transfer(ActiuniClient sender, ActiuniClient receiver, double value){
+        // Intrabank
         sender.getCont().debitare(value);  // TODO Create exceptions
         receiver.getCont().creditare(value); // TODO Create transactions
     }
 
-
-    /*
-    @Override
-    public final void debitare(Double value){
-        this.cont.debitare(value);
+    public static void transfer(ActiuniClient sender, String peerAccount, Double value){
+        // Interbank send
+        sender.getCont().debitare(value);  // TODO Create tx, excp
     }
 
-    @Override
-    public final void creditare(Double value){
-        this.cont.creditare(value);
+    public static void transfer(ActiuniClient receiver, Double value){
+        // Interbank receive
+        receiver.getCont().creditare(value);
     }
-    */
 
 
 

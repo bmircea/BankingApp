@@ -1,14 +1,15 @@
 package classes;
+import java.util.ArrayList;
 import java.util.Date;
 
-public final class ClientPersoanaFizica extends Persoana implements ActiuniClient{
-    private final Integer ID;
-    private Cont cont = null;
+import classes.Utilitare.LoanType;
+
+public final class ClientPersoanaFizica extends PersoanaFizica implements ActiuniClient{
+    private Cont cont;
+    private ArrayList<Credit> loans;
 
     public ClientPersoanaFizica(String cNP, String nume, String prenume, Date dataNastere) {
         super(cNP, nume, prenume, dataNastere);
-        this.ID = ActiuniClient.generateAccID();
-        this.cont = new Cont(this.ID);
     }
 
     @Override
@@ -22,9 +23,14 @@ public final class ClientPersoanaFizica extends Persoana implements ActiuniClien
     }
 
     @Override
-    public Integer getID() {
-        return this.ID;
+    public void addLoan(Integer durationM, Double value, LoanType type) {
+        if (loans == null){
+            loans = new ArrayList<Credit>();
+        }
+        loans.add(new Credit(durationM, value, type));
     }
+
+    
 
     
 

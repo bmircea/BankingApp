@@ -1,13 +1,17 @@
 package classes;
 
-public final class ClientPersoanaJuridica extends PersoanaJuridica implements ActiuniClient{
-    public final Integer ID;
-    public Cont cont = null;
+import java.util.ArrayList;
 
-    public ClientPersoanaJuridica(Long cUI, String denumire) {
+import classes.Utilitare.LoanType;
+
+public final class ClientPersoanaJuridica extends PersoanaJuridica implements ActiuniClient{
+    private Cont cont;
+    private ArrayList<Credit> loans;
+
+    public ClientPersoanaJuridica(long cUI, String denumire) {
         super(cUI, denumire);
-        this.ID = ActiuniClient.generateAccID();
-        this.cont = new Cont(this.ID);
+        this.cont = null;
+        this.loans = null;
     }
 
     @Override
@@ -21,8 +25,12 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
     }
 
     @Override
-    public Integer getID() {
-        return this.ID;
+    public void addLoan(Integer durationM, Double value, LoanType type) {
+        if (loans == null){
+            loans = new ArrayList<Credit>();
+        }
+
+        loans.add(new Credit(durationM, value, type));
     }
 
     

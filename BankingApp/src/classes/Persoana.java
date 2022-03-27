@@ -1,27 +1,29 @@
 package classes;
 
-import java.util.Date;
-
 public abstract class Persoana {
-    private final String CNP;
-    private String nume;
-    private String prenume;
-    private Date dataNastere;
+    private final Integer ID;
 
-    public Persoana(String cNP, String nume, String prenume, Date dataNastere) {
-        CNP = cNP;
-        this.nume = nume;
-        this.prenume = prenume;
-        this.dataNastere = dataNastere;
+    public Persoana() {
+        ID = Utilitare.getRand(100000);
     }
 
     @Override
     public String toString() {
-        return "[CNP=" + CNP + ", dataNastere=" + dataNastere + ", nume=" + nume + ", prenume=" + prenume
-                + "]";
+        return "Persoana [ID=" + ID + "]";
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public Boolean isClient(){
+        return (this instanceof ActiuniClient);
     }
 
     
 
+    
+
+    
     
 }
