@@ -21,7 +21,7 @@ public interface ActiuniClient{
 
     public static void transfer(ActiuniClient sender, String peerAccount, Double value){
         // Interbank send
-        sender.getCont().debitare(value);  // TODO Create tx, excep
+        sender.getCont().debitare(value);  // TODO Create tx, exceptions
     }
 
     public static void transfer(ActiuniClient receiver, Double value){
