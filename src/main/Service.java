@@ -5,13 +5,13 @@ import java.util.HashMap;
 import classes.*;
 
 public final class Service {
-    private HashMap<Integer, ActiuniClient> Clients; 
-    private HashMap<Integer, Tranzactie> Txs;
-    private HashMap<Integer, Angajat> Employees;
-    private HashMap<String, ActiuniClient> Accounts;
-    private HashMap<Integer, ActiuniClient> Loans;
+    private HashMap<Integer, ActiuniClient> clients; 
+    private HashMap<Integer, Tranzactie> txs;
+    private HashMap<Integer, Angajat> employees;
+    private HashMap<String, ActiuniClient> accounts;
+    private HashMap<Integer, ActiuniClient> loans;
     private HashMap<Integer, ATM> ATM;
-    private HashMap<Integer, Sucursala> Offices;
+    private HashMap<Integer, Sucursala> offices;
 
     private static Service instance = null;
     
@@ -27,13 +27,13 @@ public final class Service {
     }
 
     private final void startApp(){
-        this.Clients = new HashMap<Integer, ActiuniClient>();
-        this.Txs = new HashMap<Integer, Tranzactie>();
-        this.Employees = new HashMap<Integer, Angajat>();
-        this.Accounts= new HashMap<String, ActiuniClient>();
-        this.Loans= new HashMap<Integer, ActiuniClient>();
+        this.clients = new HashMap<Integer, ActiuniClient>();
+        this.txs = new HashMap<Integer, Tranzactie>();
+        this.employees = new HashMap<Integer, Angajat>();
+        this.accounts= new HashMap<String, ActiuniClient>();
+        this.loans= new HashMap<Integer, ActiuniClient>();
         this.ATM= new HashMap<Integer, ATM>();
-        this.Offices= new HashMap<Integer, Sucursala>();
+        this.offices= new HashMap<Integer, Sucursala>();
         // Load data from ext source
 
         System.out.println("App running");
@@ -42,26 +42,30 @@ public final class Service {
     
     // Clients    
     public HashMap<Integer, ActiuniClient> getClients() {
-        return Clients;
+        return clients;
     }
 
     public ActiuniClient getClient(Integer ID){  // Upcast la interfata, poate nu e
-        return Clients.get(ID);                      // cea mai buna solutie
+        return clients.get(ID);                      // cea mai buna solutie
     }
 
     // Transactions
     public HashMap<Integer, Tranzactie> getTxs() {
-        return Txs;
+        return txs;
     }
 
     // Employees
     public HashMap<Integer, Angajat> getEmployees() {
-        return Employees;
+        return employees;
+    }
+
+    public Angajat getEmployee(Integer ID){
+        return employees.get(ID);
     }
 
     // Accounts
     public HashMap<String, ActiuniClient> getAccounts() {
-        return Accounts;
+        return accounts;
     }
 
     public Double getAccountBalance(Integer ID){
@@ -74,7 +78,7 @@ public final class Service {
 
     // Loans
     public HashMap<Integer, ActiuniClient> getLoans() {
-        return Loans;
+        return loans;
     }
 
     // ATMs
@@ -84,7 +88,7 @@ public final class Service {
 
     // Offices
     public HashMap<Integer, Sucursala> getOffices() {
-        return Offices;
+        return offices;
     }
 
     

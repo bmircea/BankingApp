@@ -16,6 +16,12 @@ public final class Cont implements OperatiuniCont{
     }
 
     @Override
+    public String getNumarCont() {
+        return this.numarCont;
+        
+    }
+
+    @Override
     public String toString() {
         return this.numarCont;
     }
@@ -29,6 +35,8 @@ public final class Cont implements OperatiuniCont{
     public void debitare(Double value) {
         this.sold -= value;
     }
+
+
 
     
 
