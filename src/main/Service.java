@@ -1,7 +1,10 @@
 package main;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import classes.*;
+import classes.Utilitare.TxState;
 
 public final class Service {
     private HashMap<Integer, ActiuniClient> clients; 
@@ -26,7 +29,22 @@ public final class Service {
     }
     
     private final void loadData(){
-
+        ResultSet rs = DatabaseConnection.read(Angajat.getSelectQuery());
+        try {
+            while (rs.next()){
+                Angajat a = new Angajat(rs.getInt("ID"),
+                                        rs.getString("CNP"), 
+                                        rs.getString("nume"), 
+                                        rs.getString("prenume"), 
+                                        rs.getDate("dataNastere"), 
+                                        rs.getString("departament"), 
+                                        new Sucursala("test"));
+                this.employees.put(a.getID(), a);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     private final void startApp(){
@@ -43,6 +61,21 @@ public final class Service {
     }
 
     
+    public static void list(String table){
+        switch(table){
+            case "employees":
+            break;
+            case "accounts":
+            break;
+            case "txs":
+            break;
+            case "clients":
+            break;
+
+        }
+    }
+
+
     // Clients    
     public HashMap<Integer, ActiuniClient> getClients() {
         Logger.log("getClients");
@@ -52,6 +85,15 @@ public final class Service {
     public ActiuniClient getClient(Integer ID){  
         Logger.log("getClient");
         return clients.get(ID);                      
+    }
+
+    public void deleteClient(ActiuniClient cl){
+        Logger.log("deletClient");
+        if (cl instanceof ClientPersoanaFizica){
+            DatabaseConnection.delete(String.format((((ClientPersoanaFizica)cl).getDeleteQuery()), String.valueOf(cl.getID())));
+            
+        }
+        clients.remove(cl.getID());
     }
 
     // Transactions
@@ -64,6 +106,13 @@ public final class Service {
     public HashMap<Integer, Angajat> getEmployees() {
         Logger.log("getEmployees");
         return employees;
+    }
+
+    public void deleteEmployee(Angajat a){
+        Logger.log("deleteEmployee");
+        System.out.println(String.format(a.getDeleteQuery(), a.getID()));
+        DatabaseConnection.delete(String.format(a.getDeleteQuery(), a.getID()));
+        employees.remove(a.getID());
     }
 
     // Accounts
@@ -100,23 +149,27 @@ public final class Service {
         return offices;
     }
 
-    
-
     // Actions
     public void transferFunds(ActiuniClient sender, ActiuniClient receiver, Double value){
         Logger.log("transferFundsIntrabank");
         ActiuniClient.transfer(sender, receiver, value);
+        Tranzactie tx = new Tranzactie(receiver.getCont(), sender.getCont(), value);
+        txs.put(tx.getID(), tx);
     }
 
     public void transferFunds(ActiuniClient sender, String peerAccount, Double value){
         Logger.log("transferFundsInterbankSend");
         ActiuniClient.transfer(sender, peerAccount, value);
+        Tranzactie tx = new Tranzactie(peerAccount, sender.getCont(), value);
+        txs.put(tx.getID(), tx);
     }
 
     public void transferFunds(ActiuniClient receiver, Double value){
         Logger.log("transferFundsInterbankSend");
         ActiuniClient.transfer(receiver, value);
     }
+
+    
 
 
 

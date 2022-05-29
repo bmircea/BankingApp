@@ -8,9 +8,17 @@ public abstract class PersoanaFizica extends Persoana {
     private String prenume;
     private Date dataNastere;
 
-    public PersoanaFizica(String cNP, String nume, String prenume, Date dataNastere) {
+    public PersoanaFizica(String CNP, String nume, String prenume, Date dataNastere) {
         super();
-        CNP = cNP;
+        this.CNP = CNP;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.dataNastere = dataNastere;
+    }
+
+    public PersoanaFizica(Integer ID, String CNP, String nume, String prenume, Date dataNastere) {
+        super(ID);
+        this.CNP = CNP;
         this.nume = nume;
         this.prenume = prenume;
         this.dataNastere = dataNastere;

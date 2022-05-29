@@ -7,6 +7,10 @@ public abstract class Persoana {
         ID = Utilitare.getRand(100000);
     }
 
+    public Persoana(Integer ID){
+        this.ID = ID;
+    }
+
     @Override
     public String toString() {
         return "";

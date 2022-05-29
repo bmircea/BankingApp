@@ -6,15 +6,21 @@ public final class Angajat extends PersoanaFizica implements SQLActions{
     private String departament;
     private Sucursala sucursala;
 
-    public Angajat(String cNP, String nume, String prenume, Date dataNastere, String departament, Sucursala sucursala) {
-        super(cNP, nume, prenume, dataNastere);
+    public Angajat(String CNP, String nume, String prenume, Date dataNastere, String departament, Sucursala sucursala) {
+        super(CNP, nume, prenume, dataNastere);
+        this.departament = departament;
+        this.sucursala = sucursala;
+    }
+
+    public Angajat(Integer ID, String CNP, String nume, String prenume, Date dataNastere, String departament, Sucursala sucursala) {
+        super(ID, CNP, nume, prenume, dataNastere);
         this.departament = departament;
         this.sucursala = sucursala;
     }
 
     @Override
     public String toString() {
-        return ", departament=" + departament + ", sucursala=" + sucursala.toString();
+        return super.toString() + ", departament=" + departament + sucursala.toString();
     }
 
     public String getDepartament() {
@@ -47,8 +53,11 @@ public final class Angajat extends PersoanaFizica implements SQLActions{
 
     @Override
     public String getDeleteQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "DELETE FROM ANGAJAT WHERE ID = %d";
+    }
+
+    public static String getSelectQuery() {
+        return "SELECT * FROM ANGAJAT";
     }
 
     

@@ -55,6 +55,10 @@ public final class Cont implements OperatiuniCont, SQLActions{
         return null;
     }
 
+    public static String getSelectQuery(){
+        return "SELECT * FROM CONT";
+    }
+
     
 
     

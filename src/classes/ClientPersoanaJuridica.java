@@ -51,6 +51,10 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
         return null;
     }
 
+    public static String getSelectQuery() {
+        return "SELECT * FROM CLIENT";
+    }
+
     
 
     

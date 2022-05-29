@@ -40,6 +40,10 @@ public class ATM implements SQLActions{
         return null;
     }
 
+    public static String getSelectQuery() {
+        return null;
+    }
+
     
 
     

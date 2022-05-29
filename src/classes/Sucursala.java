@@ -4,7 +4,7 @@ public final class Sucursala implements SQLActions{
     private final String locatie;
     private final Integer ID;
 
-    public Sucursala(String locatie, Integer iD) {
+    public Sucursala(String locatie) {
         this.locatie = locatie;
         ID = Utilitare.getRand(10000);
     }

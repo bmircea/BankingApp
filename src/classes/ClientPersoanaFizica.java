@@ -48,6 +48,10 @@ public final class ClientPersoanaFizica extends PersoanaFizica implements Actiun
         return null;
     }
 
+    public static String getSelectQuery() {
+        return "SELECT * FROM CLIENT";
+    }
+
     
 
     

@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import com.mysql.cj.jdbc.Driver;
 
 public class DatabaseConnection {
     private static DatabaseConnection instance = null;
@@ -27,9 +26,18 @@ public class DatabaseConnection {
         }    
         
         if (instance == null){
-                return new DatabaseConnection(DriverManager.getConnection(url, connectionProperties));
-            } else return instance;
-            
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            conn = DriverManager.getConnection("jdbc:mysql://b6604973ab52f0:7708ceee@eu-cdbr-west-02.cleardb.net/heroku_08b2595a841e93c?reconnect=true");
+            instance = new DatabaseConnection(conn);
+                
+        }
+        return instance;
+        
         }
 
     private static void initProperties(){
@@ -54,7 +62,8 @@ public class DatabaseConnection {
     private static int execUpdate(String sql){
         int res = 0;
         try {
-            Statement statement = instance.createStatement();    
+            conn = DriverManager.getConnection("jdbc:mysql://b6604973ab52f0:7708ceee@eu-cdbr-west-02.cleardb.net/heroku_08b2595a841e93c?reconnect=true");
+            Statement statement = conn.createStatement();    
             res = statement.executeUpdate(sql);
         } catch (SQLException e){
             System.out.println("SQL Execution error");
@@ -64,9 +73,18 @@ public class DatabaseConnection {
     
 
 
-    public static ResultSet read(String sql) throws SQLException{
-        PreparedStatement statement = instance.prepareStatement(sql);
-        return statement.executeQuery();
+    public static ResultSet read(String sql){
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://b6604973ab52f0:7708ceee@eu-cdbr-west-02.cleardb.net/heroku_08b2595a841e93c?reconnect=true");
+            PreparedStatement statement = conn.prepareStatement(sql);
+            rs = statement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return rs;
     }
 
     public static int insert(String sql){

@@ -26,8 +26,4 @@ public class Utilitare {
         return rnd.nextInt(bound);
     }
 
-    public static Tranzactie createTx(Cont receiverAccount, Cont senderAccount, Double value){
-        return new Tranzactie(receiverAccount, senderAccount, value, Utilitare.TxState.SENT);
-    }
-
 }
