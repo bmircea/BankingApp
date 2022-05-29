@@ -1,6 +1,6 @@
 package classes;
 
-public final class Sucursala {
+public final class Sucursala implements SQLActions{
     private final String locatie;
     private final Integer ID;
 
@@ -16,6 +16,32 @@ public final class Sucursala {
     public Integer getID() {
         return ID;
     }
+
+    @Override
+    public String toString() {
+        return "locatie=" + locatie;
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
+
 
     
 

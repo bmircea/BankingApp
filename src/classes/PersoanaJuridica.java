@@ -1,7 +1,7 @@
 package classes;
 
 public abstract class PersoanaJuridica extends Persoana {
-    private final long CUI;
+    private final Long CUI;
     private String denumire;
 
     public PersoanaJuridica(long cUI, String denumire) {
@@ -12,7 +12,7 @@ public abstract class PersoanaJuridica extends Persoana {
 
     @Override
     public String toString() {
-        return "[CUI=" + CUI + ", denumire=" + denumire + "]";
+        return super.toString() + "CUI=" + String.valueOf(CUI) + ", denumire=" + denumire;
     }
 
 

@@ -9,7 +9,7 @@ public abstract class Persoana {
 
     @Override
     public String toString() {
-        return "Persoana [ID=" + ID + "]";
+        return "";
     }
 
     public Integer getID() {

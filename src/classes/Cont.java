@@ -1,6 +1,6 @@
 package classes;
 
-public final class Cont implements OperatiuniCont{
+public final class Cont implements OperatiuniCont, SQLActions{
     private final String numarCont;
     private Double sold;
     
@@ -15,6 +15,10 @@ public final class Cont implements OperatiuniCont{
         return this.sold;
     }
 
+    public final String getNumarCont(){
+        return this.numarCont;
+    }
+    
     @Override
     public String toString() {
         return this.numarCont;
@@ -28,6 +32,24 @@ public final class Cont implements OperatiuniCont{
     @Override
     public void debitare(Double value) {
         this.sold -= value;
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     

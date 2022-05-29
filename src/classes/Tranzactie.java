@@ -1,9 +1,9 @@
 package classes;
 
-import java.util.Date;
+import java.sql.Date;
 import classes.Utilitare.TxState;
 
-public final class Tranzactie {
+public final class Tranzactie implements SQLActions{
     private Integer ID;
     private Date timestamp;
     private Cont receiverAccount, senderAccount;
@@ -12,7 +12,7 @@ public final class Tranzactie {
 
     public Tranzactie(Cont receiverAccount, Cont senderAccount, Double value, TxState state) {
         this.ID = Utilitare.getRand(10000);
-        this.timestamp = new Date();
+        this.timestamp = null;
         this.receiverAccount = receiverAccount;
         this.senderAccount = senderAccount;
         this.value = value;
@@ -21,8 +21,26 @@ public final class Tranzactie {
 
     @Override
     public String toString() {
-        return "Tranzactie [receiverAccount=" + receiverAccount + ", senderAccount=" + senderAccount + ", state="
-                + state + ", timestamp=" + timestamp + ", value=" + value + "]";
+        return "receiverAccount=" + receiverAccount.toString() + ", senderAccount=" + senderAccount.toString() + ", state="
+                + String.valueOf(state.ordinal()) + ", timestamp=" + timestamp + ", value=" + value.toString();
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     

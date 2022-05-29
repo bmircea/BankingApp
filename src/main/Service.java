@@ -1,17 +1,16 @@
 package main;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import classes.*;
 
 public final class Service {
-    private HashMap<Integer, ActiuniClient> Clients; 
-    private HashMap<Integer, Tranzactie> Txs;
-    private HashMap<Integer, Angajat> Employees;
-    private HashMap<String, ActiuniClient> Accounts;
-    private HashMap<Integer, ActiuniClient> Loans;
-    private HashMap<Integer, ATM> ATM;
-    private HashMap<Integer, Sucursala> Offices;
+    private HashMap<Integer, ActiuniClient> clients; 
+    private HashMap<Integer, Tranzactie> txs;
+    private HashMap<Integer, Angajat> employees;
+    private HashMap<String,  Cont> accounts;
+    private HashMap<Integer, Credit> loans;
+    private HashMap<Integer, ATM> atm;
+    private HashMap<Integer, Sucursala> offices;
 
     private static Service instance = null;
     
@@ -25,16 +24,20 @@ public final class Service {
         }
         return instance;
     }
+    
+    private final void loadData(){
+
+    }
 
     private final void startApp(){
-        this.Clients = new HashMap<Integer, ActiuniClient>();
-        this.Txs = new HashMap<Integer, Tranzactie>();
-        this.Employees = new HashMap<Integer, Angajat>();
-        this.Accounts= new HashMap<String, ActiuniClient>();
-        this.Loans= new HashMap<Integer, ActiuniClient>();
-        this.ATM= new HashMap<Integer, ATM>();
-        this.Offices= new HashMap<Integer, Sucursala>();
-        // Load data from ext source
+        this.clients = new HashMap<Integer, ActiuniClient>();
+        this.txs = new HashMap<Integer, Tranzactie>();
+        this.employees = new HashMap<Integer, Angajat>();
+        this.accounts= new HashMap<String, Cont>();
+        this.loans= new HashMap<Integer, Credit>();
+        this.atm= new HashMap<Integer, ATM>();
+        this.offices= new HashMap<Integer, Sucursala>();
+        loadData();
 
         System.out.println("App running");
     }
@@ -42,63 +45,76 @@ public final class Service {
     
     // Clients    
     public HashMap<Integer, ActiuniClient> getClients() {
-        return Clients;
+        Logger.log("getClients");
+        return clients;
     }
 
-    public ActiuniClient getClient(Integer ID){  // Upcast la interfata, poate nu e
-        return Clients.get(ID);                      // cea mai buna solutie
+    public ActiuniClient getClient(Integer ID){  
+        Logger.log("getClient");
+        return clients.get(ID);                      
     }
 
     // Transactions
     public HashMap<Integer, Tranzactie> getTxs() {
-        return Txs;
+        Logger.log("getTxs");
+        return txs;
     }
 
     // Employees
     public HashMap<Integer, Angajat> getEmployees() {
-        return Employees;
+        Logger.log("getEmployees");
+        return employees;
     }
 
     // Accounts
-    public HashMap<String, ActiuniClient> getAccounts() {
-        return Accounts;
+    public HashMap<String, Cont> getAccounts() {
+        Logger.log("getAccount"); 
+        return accounts;
     }
 
     public Double getAccountBalance(Integer ID){
+        Logger.log("getAccountBalance");
         return getClient(ID).getCont().getSold();
     }
 
     public Double getAccountBalance(ActiuniClient client){
+        Logger.log("getAccountBalance");
         return client.getCont().getSold();
     }
 
     // Loans
-    public HashMap<Integer, ActiuniClient> getLoans() {
-        return Loans;
+    public HashMap<Integer, Credit> getLoans() {
+        Logger.log("getLoans");
+        return loans;
     }
 
     // ATMs
     public HashMap<Integer, ATM> getATM() {
-        return ATM;
+        Logger.log("getATM");
+        return atm;
     }
 
     // Offices
     public HashMap<Integer, Sucursala> getOffices() {
-        return Offices;
+        Logger.log("getOffices");
+        return offices;
     }
 
     
 
     // Actions
     public void transferFunds(ActiuniClient sender, ActiuniClient receiver, Double value){
+        Logger.log("transferFundsIntrabank");
         ActiuniClient.transfer(sender, receiver, value);
     }
 
     public void transferFunds(ActiuniClient sender, String peerAccount, Double value){
+        Logger.log("transferFundsInterbankSend");
         ActiuniClient.transfer(sender, peerAccount, value);
     }
 
     public void transferFunds(ActiuniClient receiver, Double value){
+        Logger.log("transferFundsInterbankSend");
         ActiuniClient.transfer(receiver, value);
     }
 

@@ -1,6 +1,6 @@
 package classes;
 
-public class ATM {
+public class ATM implements SQLActions{
     private final String locatie;
     private final Integer ID;
 
@@ -19,7 +19,25 @@ public class ATM {
 
     @Override
     public String toString() {
-        return "ATM [ID=" + ID + ", locatie=" + locatie + "]";
+        return "locatie=" + locatie;
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     

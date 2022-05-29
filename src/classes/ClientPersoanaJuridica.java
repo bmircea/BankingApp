@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import classes.Utilitare.LoanType;
 
-public final class ClientPersoanaJuridica extends PersoanaJuridica implements ActiuniClient{
+public final class ClientPersoanaJuridica extends PersoanaJuridica implements ActiuniClient, SQLActions{
     private Cont cont;
     private ArrayList<Credit> loans;
 
@@ -16,7 +16,7 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
 
     @Override
     public String toString() {
-        return "ClientPersoanaJuridica" + super.toString();
+        return super.toString() + ", " + this.cont.getNumarCont();
     }
 
     @Override
@@ -31,6 +31,24 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
         }
 
         loans.add(new Credit(durationM, value, type));
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     

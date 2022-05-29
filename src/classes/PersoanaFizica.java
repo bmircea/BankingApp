@@ -1,6 +1,6 @@
 package classes;
 
-import java.util.Date;
+import java.sql.Date;
 
 public abstract class PersoanaFizica extends Persoana {
     private final String CNP;
@@ -18,8 +18,7 @@ public abstract class PersoanaFizica extends Persoana {
 
     @Override
     public String toString() {
-        return "[CNP=" + CNP + ", dataNastere=" + dataNastere + ", nume=" + nume + ", prenume=" + prenume
-                + "]";
+        return super.toString() + "CNP=" + CNP + ", dataNastere=" + dataNastere + ", nume=" + nume + ", prenume=" + prenume;
     }
 
     

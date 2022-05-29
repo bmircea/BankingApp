@@ -2,9 +2,9 @@ package classes;
 
 import classes.Utilitare.LoanState;
 import classes.Utilitare.LoanType;
-import java.util.Date;
+import java.sql.Date;
 
-public class Credit {
+public class Credit implements SQLActions{
     private Integer loanID;
     private LoanState state;
     private final LoanType type;
@@ -16,15 +16,15 @@ public class Credit {
         this.loanID = Utilitare.getRand(10000);
         this.durationM = durationM;
         this.value = value;
-        this.startDate = new Date();
+        this.startDate = null;
         this.state = LoanState.APPROVAL;
         this.type = type;
     }
 
     @Override
     public String toString() {
-        return "Credit [durationM=" + durationM + ", startDate=" + startDate + ", state=" + state + ", type=" + type
-                + ", value=" + value + "]";
+        return "durationM=" + durationM.toString() + ", startDate=" + startDate.toString() + ", state=" + String.valueOf(state.ordinal()) + ", type=" + String.valueOf(type.ordinal())
+                + ", value=" + value.toString();
     }
 
     
@@ -67,6 +67,24 @@ public class Credit {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    @Override
+    public String getInsertQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getUpdateQuery() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getDeleteQuery() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     
