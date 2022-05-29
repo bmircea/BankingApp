@@ -14,6 +14,15 @@ public final class App {
         logger = Logger.getInstance();
     
         // CLI menu
+        System.out.println("Banking App menu");
+        System.out.println("Choose an option and press enter:");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
+        System.out.println("1. Employees");
         String name = System.console().readLine();
 
         System.out.println(name);

@@ -14,11 +14,14 @@ public final class Cont implements OperatiuniCont, SQLActions{
     public final Double getSold(){
         return this.sold;
     }
-
-    public final String getNumarCont(){
-        return this.numarCont;
-    }
     
+    
+    @Override
+    public String getNumarCont() {
+        return this.numarCont;
+        
+    }
+
     @Override
     public String toString() {
         return this.numarCont;
