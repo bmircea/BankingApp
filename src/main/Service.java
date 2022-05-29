@@ -2,9 +2,10 @@ package main;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.ArrayList;
 
 import classes.*;
-import classes.Utilitare.TxState;
 
 public final class Service {
     private HashMap<Integer, ActiuniClient> clients; 
@@ -14,7 +15,7 @@ public final class Service {
     private HashMap<Integer, Credit> loans;
     private HashMap<Integer, ATM> atm;
     private HashMap<Integer, Sucursala> offices;
-
+    private static ArrayList<LoggableEvent> events;
     private static Service instance = null;
     
     private Service(){  // Private constructor - singleton
@@ -55,26 +56,12 @@ public final class Service {
         this.loans= new HashMap<Integer, Credit>();
         this.atm= new HashMap<Integer, ATM>();
         this.offices= new HashMap<Integer, Sucursala>();
+        events = new ArrayList<LoggableEvent>();
+
         loadData();
 
         System.out.println("App running");
     }
-
-    
-    public static void list(String table){
-        switch(table){
-            case "employees":
-            break;
-            case "accounts":
-            break;
-            case "txs":
-            break;
-            case "clients":
-            break;
-
-        }
-    }
-
 
     // Clients    
     public HashMap<Integer, ActiuniClient> getClients() {
@@ -169,6 +156,15 @@ public final class Service {
         ActiuniClient.transfer(receiver, value);
     }
 
+    // Events
+
+    public static void addEvent(LoggableEvent e){
+        events.add(e);
+    }
+
+    public static ArrayList<LoggableEvent> getEvents(){
+        return events;
+    }
     
 
 

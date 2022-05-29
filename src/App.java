@@ -21,7 +21,7 @@ public final class App {
     public static void main(String[] args) throws Exception {
         App.s = Service.getInstance();
         //dbconn = DatabaseConnection.getConnection();
-        Logger.setFilePath("");
+        Logger.setFilePath("C:\\Users\\Mircea\\Facultate\\Sem 2\\EAP\\BankingApp\\log.csv");
         logger = Logger.getInstance();
         in = new Scanner(System.in);
 
@@ -224,6 +224,7 @@ public final class App {
     }
 
     private static void closeApp(){
+        Logger.dumpLog(Service.getEvents());
         close = 1;
     }
 
