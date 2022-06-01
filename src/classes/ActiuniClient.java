@@ -13,15 +13,15 @@ public interface ActiuniClient{
 
     public void addLoan(Integer durationM, Double value, LoanType type);
     
-    public static void transfer(ActiuniClient sender, ActiuniClient receiver, double value){
+    public static void transfer(Cont sender, Cont receiver, Double value){
         // Intrabank
-        sender.getCont().debitare(value);  // TODO Create exceptions
-        receiver.getCont().creditare(value); // TODO Create transactions
+        sender.debitare(value);  
+        receiver.creditare(value); 
     }
 
     public static void transfer(ActiuniClient sender, String peerAccount, Double value){
         // Interbank send
-        sender.getCont().debitare(value);  // TODO Create tx, exceptions
+        sender.getCont().debitare(value); 
     }
 
     public static void transfer(ActiuniClient receiver, Double value){

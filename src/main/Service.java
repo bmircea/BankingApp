@@ -220,6 +220,8 @@ public final class Service {
         sendercont = in.nextLine();
         System.out.println("Value: ");
         value = in.nextDouble();
+        accounts.get(sendercont).debitare(value);
+        accounts.get(reccont).creditare(value);
         Tranzactie tx = new Tranzactie(accounts.get(reccont), accounts.get(sendercont), value);
         txs.put(tx.getID(), tx);
         DatabaseConnection.insert(tx.getInsertQuery());
@@ -357,7 +359,11 @@ public final class Service {
     // Actions
     public void transferFunds(ActiuniClient sender, ActiuniClient receiver, Double value){
         Logger.log("transferFundsIntrabank");
-        ActiuniClient.transfer(sender, receiver, value);
+        accounts.get(sender.getCont().getNumarCont()).debitare(value);
+        accounts.get(receiver.getCont().getNumarCont()).creditare(value);
+
+        //Force update
+        System.out.println(accounts.get(sender.getCont().getNumarCont()).getSold());
         Tranzactie tx = new Tranzactie(receiver.getCont(), sender.getCont(), value);
         txs.put(tx.getID(), tx);
     }

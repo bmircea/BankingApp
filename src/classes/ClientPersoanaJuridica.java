@@ -22,7 +22,7 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.cont.getNumarCont();
+        return super.toString() + ", numarCont=\"" + this.cont.getNumarCont() + "\"";
     }
 
     public String toStringStripCols(){

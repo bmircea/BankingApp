@@ -18,7 +18,7 @@ public abstract class PersoanaJuridica extends Persoana {
 
     @Override
     public String toString() {
-        return super.toString() + "cod=" + CUI + ", nume1=" + denumire;
+        return super.toString() + "cod=\"" + CUI + "\", nume1=\"" + denumire + "\"";
     }
 
     public String toStringStripCols(){
