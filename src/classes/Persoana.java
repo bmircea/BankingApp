@@ -16,6 +16,10 @@ public abstract class Persoana {
         return "";
     }
 
+    public String toStringStripCols() {
+        return ID.toString() + ", ";
+    }
+
     public Integer getID() {
         return ID;
     }

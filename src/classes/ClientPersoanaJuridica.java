@@ -8,10 +8,16 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
     private Cont cont;
     private ArrayList<Credit> loans;
 
-    public ClientPersoanaJuridica(long cUI, String denumire) {
+
+    public ClientPersoanaJuridica(String cUI, String denumire) {
         super(cUI, denumire);
-        this.cont = null;
+        this.cont = new Cont(this.getID());
         this.loans = null;
+    }
+
+    public ClientPersoanaJuridica(Integer ID, String cUI, String denumire, Cont cont){
+        super(ID, cUI, denumire);
+        this.cont = cont;
     }
 
     @Override
@@ -19,9 +25,17 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
         return super.toString() + ", " + this.cont.getNumarCont();
     }
 
+    public String toStringStripCols(){
+        return super.toStringStripCols() + ",\"" + this.cont.getNumarCont() + "\"";
+    }
+
     @Override
     public Cont getCont() {
         return this.cont;
+    }
+
+    public void setCont(Cont c) {
+        this.cont = c;
     }
 
     @Override
@@ -35,20 +49,17 @@ public final class ClientPersoanaJuridica extends PersoanaJuridica implements Ac
 
     @Override
     public String getInsertQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "INSERT INTO CLIENT VALUES (" + this.toStringStripCols() + ");";
     }
 
     @Override
     public String getUpdateQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "UPDATE CLIENT SET " + this.toString() + ";";
     }
 
     @Override
     public String getDeleteQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "DELETE FROM CLIENT WHERE ID = " + this.getID().toString() + ");";
     }
 
     public static String getSelectQuery() {

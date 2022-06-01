@@ -20,7 +20,11 @@ public final class Angajat extends PersoanaFizica implements SQLActions{
 
     @Override
     public String toString() {
-        return super.toString() + ", departament=" + departament + sucursala.toString();
+        return super.toString() + ", departament=\"" + departament + "\"" + sucursala.toString() + "\"";
+    }
+
+    public String toStringStripCols() {
+        return super.toStringStripCols() + ", \"" + departament + "\"" + sucursala.toStringStripCols() + "\"";
     }
 
     public String getDepartament() {
@@ -41,14 +45,12 @@ public final class Angajat extends PersoanaFizica implements SQLActions{
 
     @Override
     public String getInsertQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "INSERT INTO ANGAJAT VALUES (" + this.toStringStripCols() + ");";
     }
 
     @Override
     public String getUpdateQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "UPDATE ANGAJAT SET " + this.toString() + " WHERE ID = " + this.getID().toString() + ";";
     }
 
     @Override
@@ -59,6 +61,9 @@ public final class Angajat extends PersoanaFizica implements SQLActions{
     public static String getSelectQuery() {
         return "SELECT * FROM ANGAJAT";
     }
+
+
+
 
     
 

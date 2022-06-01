@@ -7,6 +7,7 @@ import classes.ActiuniClient;
 import classes.Angajat;
 import classes.ClientPersoanaFizica;
 import classes.ClientPersoanaJuridica;
+import classes.Cont;
 import classes.Tranzactie;
 import main.DatabaseConnection;
 import main.Logger;
@@ -20,16 +21,21 @@ public final class App {
     private static Integer close = 0;
     public static void main(String[] args) throws Exception {
         App.s = Service.getInstance();
+        in = new Scanner(System.in);
         //dbconn = DatabaseConnection.getConnection();
         Logger.setFilePath("C:\\Users\\Mircea\\Facultate\\Sem 2\\EAP\\BankingApp\\log.csv");
         logger = Logger.getInstance();
-        in = new Scanner(System.in);
+        
 
         // CLI menu
         System.out.println("Banking App menu");
         System.out.println("Choose an option and press enter:");
         mainMenu();       
         
+    }
+
+    public static Scanner getScanner(){
+        return in;
     }
 
     private static void mainMenu(){
@@ -99,13 +105,23 @@ public final class App {
             Tranzactie t = e.get(i);
             System.out.println(String.format("%d %s", i, t.toString()));
         }
-        System.out.println("1. Create transaction");
+        System.out.println("1. Delete");
+        System.out.println("2. Add");
+        System.out.println("3. Update");
         System.out.println("0. Back");
         opt = in.nextInt();
 
         switch (opt){
             case 1:
-                createTransaction();
+                Integer idd = inputID();
+                s.deleteTx(e.get(idd));
+            break;
+            case 2:;
+                s.addTx(in);
+            break;
+            case 3:
+                Integer idu = inputID();
+                s.updateTx(e.get(idu), in);
             break;
             case 0:
                 mainMenu();
@@ -118,10 +134,30 @@ public final class App {
 
     private static void accountsMenu(){
         clearConsole();
+
+        HashMap<String, Cont> e = s.getAccounts();
+        for (String i: e.keySet()){
+            Cont t = e.get(i);
+            System.out.println(String.format("%s %s", i, t.toString()));
+        }
+        System.out.println("1. Delete");
+        System.out.println("2. Add");
+        System.out.println("3. Update");
         System.out.println("0. Back");
         opt = in.nextInt();
 
         switch (opt){
+            case 1:
+                String idd = inputIDString();
+                s.deleteAccount(e.get(idd));
+            break;
+            case 2:
+                s.addAccount(in);
+            break;
+            case 3:
+                String idu = inputIDString();
+                s.updateAccount(e.get(idu), in);
+            break;
             case 0:
                 mainMenu();
             break;
@@ -140,16 +176,21 @@ public final class App {
         }
         System.out.println("1. Delete");
         System.out.println("2. Add");
+        System.out.println("3. Update");
         System.out.println("0. Back");
         opt = in.nextInt();
 
         switch (opt){
             case 1:
-                Integer id = delete();
-                s.deleteEmployee(e.get(id));
+                Integer idd = inputID();
+                s.deleteEmployee(e.get(idd));
             break;
             case 2:
-                add();
+                s.addEmployee(in);
+            break;
+            case 3:
+                Integer idu = inputID();
+                s.updateEmployee(e.get(idu), in);
             break;
             case 0:
                 mainMenu();
@@ -158,6 +199,7 @@ public final class App {
                 defaultCase();
             break;
         }
+        System.out.println("finished employees");
     }
 
     private static void persFiziceMenu(){
@@ -172,16 +214,21 @@ public final class App {
 
         System.out.println("1. Delete");
         System.out.println("2. Add");
+        System.out.println("3. Update");
         System.out.println("0. Back");
         opt = in.nextInt();
 
         switch (opt){
             case 1:
-                Integer id = delete();
-                s.deleteClient(h.get(id));        
+                Integer idd = inputID();
+                s.deleteClient(h.get(idd));
             break;
             case 2:
-                add();
+                s.addClient(in, 1);
+            break;
+            case 3:
+                Integer idu = inputID();
+                s.updateClient(h.get(idu), in, 1);
             break;
             case 0:
                 clientsMenu();
@@ -203,16 +250,21 @@ public final class App {
         }
         System.out.println("1. Delete");
         System.out.println("2. Add");
+        System.out.println("3. Update");
         System.out.println("0. Back");
         opt = in.nextInt();
 
         switch (opt){
             case 1:
-                Integer id = delete();
-                s.deleteClient(h.get(id)); 
+                Integer idd = inputID();
+                s.deleteClient(h.get(idd)); 
             break;
             case 2:
-                add();
+                s.addClient(in, 2);
+            break;
+            case 3:
+                Integer idu = inputID();
+                s.updateClient(h.get(idu), in, 2);
             break;
             case 0:
                 clientsMenu();
@@ -258,9 +310,16 @@ public final class App {
         mainMenu();
     }
 
-    public static int delete(){
+    public static int inputID(){
         System.out.println("Please input the id:");
         Integer id = in.nextInt();
+        return id;
+    }
+
+    public static String inputIDString(){
+        in.nextLine();
+        System.out.println("Please input the account number");
+        String id = in.nextLine();
         return id;
     }
 
@@ -268,10 +327,6 @@ public final class App {
         System.out.println("Please input the id:");
         String str = in.nextLine();
         return str;
-    }
-
-    public static void add(){
-        
     }
 
     public static void createTransaction(){

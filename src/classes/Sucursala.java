@@ -19,7 +19,11 @@ public final class Sucursala implements SQLActions{
 
     @Override
     public String toString() {
-        return "locatie=" + locatie;
+        return ", locatie=\"" + locatie;
+    }
+
+    public String toStringStripCols() {
+        return ", \"" + locatie;
     }
 
     @Override

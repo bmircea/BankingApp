@@ -61,6 +61,7 @@ public class DatabaseConnection {
 
     private static int execUpdate(String sql){
         int res = 0;
+        System.out.println(sql);
         try {
             conn = DriverManager.getConnection("jdbc:mysql://b6604973ab52f0:7708ceee@eu-cdbr-west-02.cleardb.net/heroku_08b2595a841e93c?reconnect=true");
             Statement statement = conn.createStatement();    
@@ -75,6 +76,7 @@ public class DatabaseConnection {
 
     public static ResultSet read(String sql){
         ResultSet rs = null;
+        System.out.println(sql);
         try {
             conn = DriverManager.getConnection("jdbc:mysql://b6604973ab52f0:7708ceee@eu-cdbr-west-02.cleardb.net/heroku_08b2595a841e93c?reconnect=true");
             PreparedStatement statement = conn.prepareStatement(sql);

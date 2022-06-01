@@ -10,16 +10,30 @@ public final class ClientPersoanaFizica extends PersoanaFizica implements Actiun
 
     public ClientPersoanaFizica(String cNP, String nume, String prenume, Date dataNastere) {
         super(cNP, nume, prenume, dataNastere);
+        this.cont = new Cont(this.getID());
+    }
+
+    public ClientPersoanaFizica(Integer ID, String cNP, String nume, String prenume, Date dataNastere, Cont cont){
+        super(ID, cNP, nume, prenume, dataNastere);
+        this.cont = cont;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", " + String.valueOf(this.cont.getNumarCont());
+        return super.toString() + ", numarCont=\"" + String.valueOf(this.cont.getNumarCont()) + "\"";
+    }
+
+    public String toStringStripCols(){
+        return super.toStringStripCols() + ", \"" + this.cont.getNumarCont() + "\"";
     }
 
     @Override
     public Cont getCont() {
         return this.cont;
+    }
+
+    public void setCont(Cont c){
+        this.cont = c;
     }
 
     @Override
@@ -32,25 +46,23 @@ public final class ClientPersoanaFizica extends PersoanaFizica implements Actiun
 
     @Override
     public String getInsertQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "INSERT INTO CLIENT VALUES (" + this.toStringStripCols() + ");";
     }
 
     @Override
     public String getUpdateQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "UPDATE CLIENT SET " + this.toString() + " WHERE ID=" + this.getID().toString() + ";";
     }
 
     @Override
     public String getDeleteQuery() {
-        // TODO Auto-generated method stub
-        return null;
+        return "DELETE FROM CLIENT WHERE ID =" + this.getID().toString() + ";";
     }
 
     public static String getSelectQuery() {
         return "SELECT * FROM CLIENT";
     }
+
 
     
 

@@ -26,8 +26,42 @@ public abstract class PersoanaFizica extends Persoana {
 
     @Override
     public String toString() {
-        return super.toString() + "CNP=" + CNP + ", dataNastere=" + dataNastere + ", nume=" + nume + ", prenume=" + prenume;
+        return super.toString() + "cod=\"" + CNP + "\", dataNastere=STR_TO_DATE('" + dataNastere + "', '%Y-%m-%d'), nume1=\"" + nume + "\", nume2=\"" + prenume + "\"";
     }
+
+    public String toStringStripCols() {
+        return super.toStringStripCols() + "\"" + CNP + "\", \"" + nume + "\", \"" + prenume + "\", " + "STR_TO_DATE('" + dataNastere + "', '%Y-%m-%d')";
+    }
+
+    public String getCNP() {
+        return CNP;
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public String getPrenume() {
+        return prenume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+
+    public Date getDataNastere() {
+        return dataNastere;
+    }
+
+    public void setDataNastere(Date dataNastere) {
+        this.dataNastere = dataNastere;
+    }
+
+    
 
     
 
